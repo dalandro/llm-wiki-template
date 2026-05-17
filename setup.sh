@@ -27,24 +27,16 @@ download_scaffold() {
 }
 
 append_claude_md() {
-  if grep -q "# LLM Wiki" "$CLAUDE_MD" 2>/dev/null; then
+  if grep -q "## LLM Wiki" "$CLAUDE_MD" 2>/dev/null; then
     echo "Wiki block already present in $CLAUDE_MD — skipping."
     return
   fi
   mkdir -p "$(dirname "$CLAUDE_MD")"
   cat >> "$CLAUDE_MD" << EOF
 
-# LLM Wiki
+## LLM Wiki
 
-Personal wiki at \`$WIKI_DIR\`. Read \`$WIKI_DIR/index.md\` first to find relevant pages, then drill into them.
-
-**Query:** When user asks something the wiki likely covers — read relevant wiki pages before answering. Don't re-derive what's already compiled.
-
-**File back automatically:** Good answers, analyses, comparisons, or discoveries from any session should be written as new wiki pages without waiting to be asked. The wiki compounds — chat history disappears, wiki pages persist. Use judgment: a one-liner answer doesn't need a page; a useful synthesis does.
-
-**Ingest style (when user adds a source):** Read it, discuss key takeaways interactively first, then write wiki pages. Don't silently batch-process — stay involved.
-
-**What belongs in wiki:** Claude/dev setup, tool configs, dev preferences, project decisions, domain knowledge, any useful answer worth keeping. Not ephemeral task details.
+Personal wiki at \`$WIKI_DIR\`. When a question seems like it might be covered there, read \`$WIKI_DIR/index.md\` first, then relevant pages.
 EOF
   echo "Wiki block appended to $CLAUDE_MD."
 }
