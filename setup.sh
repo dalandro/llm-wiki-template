@@ -42,8 +42,7 @@ EOF
 }
 
 # If run via curl pipe, $0 is "bash" — scaffold doesn't exist yet
-_src="${BASH_SOURCE[0]:-}"
-if [[ -z "$_src" || ! -f "${_src%/*}/schema.md" ]]; then
+if [[ "$0" == "bash" || ! -f "${0%/*}/schema.md" ]]; then
   download_scaffold
 fi
 
